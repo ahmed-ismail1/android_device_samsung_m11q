@@ -6,3 +6,6 @@ type wifi_efs_file, file_type, mlstrustedobject;
 
 # Persist
 type persist_wifi_file, file_type;
+
+# Samsung factory / battery health data
+type efs_factory_file, file_type;
