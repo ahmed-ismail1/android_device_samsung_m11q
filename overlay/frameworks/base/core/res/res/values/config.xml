@@ -206,6 +206,16 @@
     <!--  Define Google play service package for FRP -->
      <string name="config_persistentDataPackageName">com.google.android.gms</string>
 
+     <!-- Rear-mounted Silead fingerprint sensor.
+         Format: sensorId:modality:strength
+         0 = sensor id
+         2 = fingerprint modality
+         15 = BIOMETRIC_STRONG / Class 3
+    -->
+    <string-array name="config_biometric_sensors" translatable="false">
+        <item>0:2:15</item>
+    </string-array>
+
     <!-- ComponentName of a dream to show whenever the system would otherwise have
          gone to sleep.  When the PowerManager is asked to go to sleep, it will instead
          try to start this dream if possible.  The dream should typically call startDozing()
