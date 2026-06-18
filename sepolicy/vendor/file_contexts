@@ -22,15 +22,16 @@
 /dev/silead_fp                                                u:object_r:silead_fp_device:s0
 
 # Binaries
-/(vendor|system/vendor)/bin/hw/macloader					u:object_r:macloader_exec:s0
-/(vendor|system/vendor)/bin/init\.qti\.can\.sh				u:object_r:qti_init_shell_exec:s0
+/(vendor|system/vendor)/bin/hw/macloader				          	u:object_r:macloader_exec:s0
+/(vendor|system/vendor)/bin/init\.qti\.can\.sh		          		u:object_r:qti_init_shell_exec:s0
 
 # Data
-/data/vendor/conn(/.*)?										u:object_r:vendor_convergence_data_file:s0
+/data/vendor/conn(/.*)?								                        		u:object_r:vendor_convergence_data_file:s0
 
 # EFS
-/mnt/vendor/efs(/.*)?										u:object_r:efs_file:s0
-/mnt/vendor/efs/wifi(/.*)?									u:object_r:wifi_efs_file:s0
+/mnt/vendor/efs(/.*)?								                             		u:object_r:efs_file:s0
+/mnt/vendor/efs/wifi(/.*)?						                       			u:object_r:wifi_efs_file:s0
+/efs/FactoryApp(/.*)?                                            u:object_r:efs_factory_file:s0
 
 # HALs
 /(vendor|system/vendor)/bin/hw/android\.hardware\.health@2\.1-service-samsung		u:object_r:hal_health_default_exec:s0
