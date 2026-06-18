@@ -1,2 +1,6 @@
 allow hal_health_default efs_file:dir search;
 allow hal_health_default sysfs_battery_supply:file r_file_perms;
+
+# Allow health HAL to create and update Samsung CISD battery data
+allow hal_health_default efs_factory_file:dir rw_dir_perms;
+allow hal_health_default efs_factory_file:file create_file_perms;
