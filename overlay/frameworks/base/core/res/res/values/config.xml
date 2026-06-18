@@ -206,7 +206,7 @@
     <!--  Define Google play service package for FRP -->
      <string name="config_persistentDataPackageName">com.google.android.gms</string>
 
-     <!-- Rear-mounted Silead fingerprint sensor.
+    <!-- Rear-mounted Silead fingerprint sensor.
          Format: sensorId:modality:strength
          0 = sensor id
          2 = fingerprint modality
@@ -271,8 +271,8 @@
     <integer name="config_screenBrightnessDoze">17</integer>
 
     <!-- Array of ConnectivityManager.TYPE_xxxx values allowable for tethering -->
-    <!-- Common options are [1, 4] for TYPE_WIFI and TYPE_MOBILE_DUN or
-    <!== [0,1,5,7] for TYPE_MOBILE, TYPE_WIFI, TYPE_MOBILE_HIPRI and TYPE_BLUETOOTH -->
+    <!-- Common options are [1, 4] for TYPE_WIFI and TYPE_MOBILE_DUN
+         or [0,1,5,7] for TYPE_MOBILE, TYPE_WIFI, TYPE_MOBILE_HIPRI and TYPE_BLUETOOTH -->
     <integer-array name="config_tether_upstream_types">
         <item>0</item>
         <item>1</item>
