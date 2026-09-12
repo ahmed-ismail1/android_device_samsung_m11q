@@ -14,10 +14,10 @@
 
 LOCAL_PATH := device/samsung/m11q
 
-# Enable updating of APEXes
+# ==================== UPDATABLE APEX ====================
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
-# Overlays
+# ==================== OVERLAYS ====================
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
     $(LOCAL_PATH)/overlay-lineage
@@ -28,38 +28,41 @@ PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
     $(LOCAL_PATH)/overlay-lineage/lineage-sdk \
     $(LOCAL_PATH)/overlay-lineage/packages/apps/Updater
 
-# Screen density
+# ==================== SCREEN CONFIGURATION ====================
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
-# Boot animation
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+
+# Boot animation resolution
 TARGET_SCREEN_HEIGHT := 1560
 TARGET_SCREEN_WIDTH := 720
 
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
-# Shipping API level
+# ==================== SHIPPING API LEVEL ====================
 PRODUCT_SHIPPING_API_LEVEL := 29
 
-# Soong
+# ==================== SOONG NAMESPACES ====================
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
     hardware/samsung
 
-# Ramdisk
+# ==================== RAMDISK - Init Scripts ====================
 PRODUCT_PACKAGES += \
     fstab.boot.qcom \
     fstab.qcom \
     zram.fstab \
-	init.hq.common.rc \
-	init.hq.shipping.rc \
+    init.hq.common.rc \
+    init.hq.shipping.rc \
     init.qcom.rc \
-	init.qcom.factory.rc \
+    init.qcom.factory.rc \
     init.qcom.usb.rc \
-	init.samsung.bsp.rc \
-	init.samsung.rc \
+    init.samsung.bsp.rc \
+    init.samsung.rc \
     init.target.rc \
-    ueventd.qcom.rc \
+    ueventd.qcom.rc
+
+# ==================== RAMDISK - Shell Scripts ====================
+PRODUCT_PACKAGES += \
     init.class_main.sh \
     init.crda.sh \
     init.mdm.sh \
@@ -74,15 +77,15 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.sh \
     init.qti.fm.sh
 
-# Recovery
+# ==================== RECOVERY ====================
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/root/init.recovery.qcom.rc:root/init.recovery.qcom.rc
 
-# fastbootd
+# ==================== FASTBOOTD ====================
 PRODUCT_PACKAGES += \
     fastbootd
 
-# Permissions
+# ==================== PERMISSIONS ====================
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.biometrics.face.xml \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
@@ -116,11 +119,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.vulkan.deqp.level-2019-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
 
-# Component overrides
+# ==================== COMPONENT OVERRIDES ====================
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/component-overrides.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/component-overrides.xml
 
-# Audio
+# ==================== AUDIO ====================
 PRODUCT_PACKAGES += \
     android.hardware.audio@6.0-impl.m11q:32 \
     android.hardware.audio.service:32 \
@@ -149,7 +152,7 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
 
-# Bluetooth
+# ==================== BLUETOOTH ====================
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0.vendor:32 \
     android.hardware.bluetooth.a2dp@1.0.vendor:32 \
@@ -158,31 +161,31 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.btconfigstore@1.0.vendor:32 \
     vendor.qti.hardware.btconfigstore@2.0.vendor:32
 
-# Biometrics
+# ==================== BIOMETRICS ====================
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1.vendor:32
 
-# Gatekeeper
+# ==================== GATEKEEPER ====================
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0.vendor:32
 
-# GNSS
+# ==================== GNSS ====================
 PRODUCT_PACKAGES += \
     android.hardware.gnss.measurement_corrections@1.1.vendor:32 \
     android.hardware.gnss.visibility_control@1.0.vendor:32 \
     android.hardware.gnss@2.1.vendor:32
 
-# Keymaster
+# ==================== KEYMASTER ====================
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.1.vendor:32
 
-# Health
+# ==================== HEALTH ====================
 PRODUCT_PACKAGES += \
     android.hardware.health@2.1-impl \
     android.hardware.health@2.1-impl.recovery \
     android.hardware.health@2.1-service
 
-# Display
+# ==================== DISPLAY/GRAPHICS ====================
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
@@ -200,27 +203,27 @@ PRODUCT_PACKAGES += \
     vendor.display.config@1.0.vendor \
     vendor.display.config@2.0.vendor
 
-# FM
+# ==================== FM RADIO ====================
 PRODUCT_PACKAGES += \
     FM2 \
     libqcomfm_jni \
     qcom.fmradio
 
-# HIDL
+# ==================== HIDL ====================
 PRODUCT_PACKAGES += \
     libhidltransport.vendor \
     libhwbinder.vendor
 
-# IPA Manager
+# ==================== IPA MANAGER ====================
 PRODUCT_PACKAGES += \
     ipacm \
     IPACM_cfg.xml
 
-# Light
+# ==================== LIGHT ====================
 PRODUCT_PACKAGES += \
     android.hardware.light-service.samsung
 
-# Camera
+# ==================== CAMERA ====================
 PRODUCT_PACKAGES += \
     android.frameworks.displayservice@1.0.vendor \
     android.frameworks.sensorservice@1.0.vendor \
@@ -228,41 +231,41 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service \
     vendor.qti.hardware.camera.device@1.0.vendor
 
-# Vibrator
+# ==================== VIBRATOR ====================
 PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-impl \
     android.hardware.vibrator@1.0-service
 
-# Capability Configstore
+# ==================== CAPABILITY CONFIGSTORE ====================
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.capabilityconfigstore@1.0.vendor:32
 
-# DRM
+# ==================== DRM ====================
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.4-service.clearkey \
     android.hardware.drm@1.4.vendor
 
-# fwk-detect
+# ==================== FRAMEWORK DETECTION ====================
 PRODUCT_PACKAGES += \
     libqti_vndfwk_detect.vendor
 
-# USB HAL
+# ==================== USB HAL ====================
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.basic
 
-# Net
+# ==================== NETWORKING ====================
 PRODUCT_PACKAGES += \
     android.system.net.netd@1.0 \
     libandroid_net \
     libnl
 
-# Power
+# ==================== POWER ====================
 PRODUCT_PACKAGES += \
     android.hardware.power-service-qti \
     android.hardware.power@1.2.vendor \
     vendor.qti.hardware.perf@2.2.vendor:32
 
-# Sensors
+# ==================== SENSORS ====================
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl \
     android.hardware.sensors@1.0-service
@@ -270,22 +273,21 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
 
-# VNDK
+# ==================== VNDK ====================
 PRODUCT_COPY_FILES += \
     prebuilts/vndk/v30/arm64/arch-arm-armv8-a/shared/vndk-sp/libutils.so:$(TARGET_COPY_OUT_VENDOR)/lib/libutils-v30.so \
     prebuilts/vndk/v30/arm64/arch-arm64-armv8-a/shared/vndk-sp/libutils.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libutils-v30.so
 
-# VNDK30 Supoort
 PRODUCT_TARGET_VNDK_VERSION := 30
 PRODUCT_EXTRA_VNDK_VERSIONS := 30
 
-# Radio
+# ==================== RADIO ====================
 PRODUCT_PACKAGES += \
     libavservices_minijail.vendor \
     libjson \
     librmnetctl
 
-# RIL
+# ==================== RIL ====================
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.vendor.epdg.support=true \
     ro.radio.noril=no
@@ -297,7 +299,7 @@ PRODUCT_PACKAGES += \
     android.hardware.secure_element@1.0.vendor:32 \
     libxml2
 
-# Telephony
+# ==================== TELEPHONY ====================
 PRODUCT_PACKAGES += \
     qti-telephony-hidl-wrapper \
     qti_telephony_hidl_wrapper.xml \
@@ -308,7 +310,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
     telephony-ext
 
-# NFC
+# ==================== NFC ====================
 PRODUCT_PACKAGES += \
     android.hardware.nfc@1.0:32 \
     android.hardware.nfc@1.1:32 \
@@ -322,24 +324,20 @@ PRODUCT_PACKAGES += \
     vendor.nxp.nxpese@1.0:32 \
     vendor.nxp.nxpnfc@1.0:32
 
-#PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/nfc/permissions/,$(TARGET_COPY_OUT_ODM)/etc/permissions) \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/nfc/vintf/,$(TARGET_COPY_OUT_ODM)/etc/vintf)
-
-# IRSC
+# ==================== IRSC ====================
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
 
-# Keylayout
+# ==================== KEYLAYOUT ====================
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/keylayout/,$(TARGET_COPY_OUT_SYSTEM)/usr/keylayout)
 
-# Public Libraries
+# ==================== PUBLIC LIBRARIES ====================
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt \
     $(LOCAL_PATH)/configs/public.libraries.txt.backup:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt.backup
 
-# Omx
+# ==================== OMX CODECS ====================
 PRODUCT_PACKAGES += \
     libOmxAacEnc \
     libOmxAmrEnc \
@@ -363,15 +361,15 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video_le.xml
 
-# QTI
+# ==================== QTI PERMISSIONS ====================
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/privapp-permissions-qti.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/privapp-permissions-qti.xml
 
-# Low power Whitelist
+# ==================== QTI WHITELIST ====================
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/qti_whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/qti_whitelist.xml
 
-# Wifi
+# ==================== WI-FI ====================
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
     libcld80211 \
@@ -380,7 +378,7 @@ PRODUCT_PACKAGES += \
     wificond \
     libwifi-hal-ctrl \
     libwifi-hal-qcom \
-    wcnss_service  \
+    wcnss_service \
     wpa_supplicant \
     wpa_supplicant.conf
 
@@ -392,9 +390,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini \
     $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
-# Seccomp policies
+# ==================== SECCOMP ====================
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/seccomp/,$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy)
 
-# Call the proprietary setup
+# ==================== PROPRIETARY VENDOR FILES ====================
 $(call inherit-product, vendor/samsung/m11q/m11q-vendor.mk)
