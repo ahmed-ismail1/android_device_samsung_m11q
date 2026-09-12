@@ -15,11 +15,10 @@
 DEVICE_PATH := device/samsung/m11q
 BUILD_TOP := $(shell pwd)
 
-# Architecture
+# ==================== ARCHITECTURE ====================
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := generic
 
 TARGET_2ND_ARCH := arm
@@ -31,25 +30,25 @@ TARGET_2ND_CPU_VARIANT := cortex-a53
 TARGET_BOARD_SUFFIX := _64
 TARGET_USES_64_BIT_BINDER := true
 
-# Platform
+# ==================== PLATFORM ====================
 BOARD_VENDOR := samsung
 TARGET_BOARD_PLATFORM := msm8953
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno506
 TARGET_ENFORCES_QSSI := true
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
-# Board
+# ==================== BOARD ====================
 TARGET_BOARD_INFO_FILE ?= $(DEVICE_PATH)/board-info.txt
 TARGET_BOOTLOADER_BOARD_NAME := QC_Reference_Phone
 TARGET_NO_BOOTLOADER := true
 
-# Build flags
-ALLOW_MISSING_DEPENDENCIES=true
+# ==================== BUILD FLAGS ====================
+ALLOW_MISSING_DEPENDENCIES := true
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_VINTF_PRODUCT_COPY_FILES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
-# Kernel
+# ==================== KERNEL ====================
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_OFFSET := 0x00008000
 BOARD_RAMDISK_OFFSET := 0x02000000
@@ -60,12 +59,18 @@ BOARD_RECOVERY_DTBO_OFFSET := 21106688
 BOARD_HEADER_SIZE := 1660
 BOARD_DTB_SIZE := 859398
 BOARD_DTB_OFFSET := 0x101f00000
+
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
-BOARD_KERNEL_CMDLINE := console=null androidboot.console=ttyMSM0 androidboot.hardware=qcom user_debug=30 msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 androidboot.usbconfigfs=true loop.max_part=7 printk.devkmsg=on androidboot.selinux=permissive
+
+BOARD_KERNEL_CMDLINE := console=null androidboot.console=ttyMSM0 \
+	androidboot.hardware=qcom user_debug=30 msm_rtb.filter=0x237 \
+	ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci \
+	lpm_levels.sleep_disabled=1 androidboot.serialno=unknown
+
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_BOOT_HEADER_VERSION := 2
 
@@ -81,23 +86,22 @@ BOARD_MKBOOTIMG_ARGS += \
 	--header_version $(BOARD_BOOT_HEADER_VERSION) \
 	--dtb $(TARGET_PREBUILT_DTB)
 
-# Kernel - prebuilt
+# ==================== PREBUILT KERNEL ====================
 TARGET_FORCE_PREBUILT_KERNEL := true
 ifeq ($(TARGET_FORCE_PREBUILT_KERNEL),true)
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 endif
 
-# Kernel config
+# ==================== KERNEL BUILD CONFIG ====================
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_SOURCE := kernel/samsung/sdm450
 TARGET_KERNEL_CONFIG := a11q_open_defconfig
 TARGET_KERNEL_VERSION := 4.9
 
-# Partition Sizes
+# ==================== PARTITION SIZES ====================
 BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x04000000
 BOARD_PRODUCTIMAGE_PARTITION_SIZE := 691011584
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2516582400
@@ -105,6 +109,7 @@ BOARD_VENDORIMAGE_PARTITION_SIZE := 691011584
 BOARD_CACHEIMAGE_PARTITION_SIZE := 317718528
 BOARD_FLASH_BLOCK_SIZE := 131072
 
+# ==================== ROOT FOLDERS & SYMLINKS ====================
 BOARD_ROOT_EXTRA_FOLDERS := efs
 BOARD_ROOT_EXTRA_SYMLINKS := \
 	/vendor/dsp:/dsp \
@@ -112,10 +117,10 @@ BOARD_ROOT_EXTRA_SYMLINKS := \
 	/mnt/vendor/persist:/persist \
 	/mnt/vendor/efs:/efs
 
-# Metadata
+# ==================== METADATA ====================
 BOARD_USES_METADATA_PARTITION := true
 
-# Partitions
+# ==================== PARTITION FILE SYSTEMS ====================
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -124,16 +129,16 @@ BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := ext4
 
-# Dynamic Partition
+# ==================== DYNAMIC PARTITIONS ====================
 BOARD_SUPER_PARTITION_SIZE := 4399824896
 BOARD_SUPER_PARTITION_GROUPS := samsung_dynamic_partitions
 BOARD_SAMSUNG_DYNAMIC_PARTITIONS_SIZE := 4395630592
 BOARD_SAMSUNG_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor odm product
 
-# APEX Image
+# ==================== APEX IMAGE ====================
 DEXPREOPT_GENERATE_APEX_IMAGE := true
 
-# Audio
+# ==================== AUDIO ====================
 USE_CUSTOM_AUDIO_POLICY := 1
 USE_XML_AUDIO_POLICY_CONF := 1
 AUDIOSERVER_MULTILIB := 32
@@ -142,20 +147,20 @@ AUDIO_FEATURE_ENABLED_PROXY_DEVICE := true
 BOARD_SUPPORTS_SOUND_TRIGGER := true
 BOARD_USES_ALSA_AUDIO := true
 
-# Bluetooth
+# ==================== BLUETOOTH ====================
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 BOARD_HAVE_BLUETOOTH_QCOM := true
 
-# Camera
+# ==================== CAMERA ====================
 TARGET_USES_QTI_CAMERA_DEVICE := true
 
-# DRM
+# ==================== DRM ====================
 TARGET_ENABLE_MEDIADRM_64 := true
 
-# NFC
+# ==================== NFC ====================
 NXP_CHIP_TYPE := pn553
 
-# Graphics
+# ==================== GRAPHICS ====================
 TARGET_USES_GRALLOC1 := true
 TARGET_USES_HWC2 := true
 TARGET_USES_ION := true
@@ -165,73 +170,72 @@ TARGET_USES_YCRCB_CAMERA_PREVIEW := true
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 
-# FM
+# ==================== FM RADIO ====================
 BOARD_HAVE_QCOM_FM := true
 
-# RIL
-#BOARD_PROVIDES_LIBRIL := true
+# ==================== RIL ====================
 ENABLE_VENDOR_RIL_SERVICE := true
 
-# HIDL
+# ==================== HIDL ====================
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
-DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/compatibility_matrix.xml
+DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 
-# Display
+# ==================== DISPLAY ====================
 TARGET_SCREEN_DENSITY := 280
 
-# Keymaster
+# ==================== KEYMASTER ====================
 TARGET_PROVIDES_KEYMASTER := true
 
-# Lights
+# ==================== LIGHTS ====================
 TARGET_PROVIDES_LIBLIGHT := true
 
-# Peripheral manager
+# ==================== PERIPHERAL MANAGER ====================
 TARGET_PER_MGR_ENABLED := true
 
-# Properties
+# ==================== PROPERTIES ====================
 TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 TARGET_VENDOR_PROP := $(DEVICE_PATH)/vendor.prop
 TARGET_ODM_PROP := $(DEVICE_PATH)/odm.prop
 
-# System/Vendor/Product/Odm separation
+# ==================== SYSTEM/VENDOR/PRODUCT/ODM SEPARATION ====================
 TARGET_COPY_OUT_SYSTEM := system
 TARGET_COPY_OUT_VENDOR := vendor
 TARGET_COPY_OUT_PRODUCT := product
 TARGET_COPY_OUT_ODM := odm
 
-# Assert
+# ==================== OTA ASSERT DEVICE ====================
 TARGET_OTA_ASSERT_DEVICE := a11q,m11q,sdm450
 
-# Protobuf
+# ==================== PROTOBUF ====================
 PROTOBUF_SUPPORTED := true
 
-# Qualcomm
+# ==================== QUALCOMM HARDWARE ====================
 BOARD_USES_QCOM_HARDWARE := true
 
-# Recovery
+# ==================== RECOVERY ====================
 BOARD_HAS_DOWNLOAD_MODE := true
 BOARD_INCLUDE_RECOVERY_DTBO := true
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/recovery.fstab
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_USERIMAGES_USE_EXT4 := true
 
-# SELinux
-include device/qcom/sepolicy-legacy-um/SEPolicy.mk
+# ==================== SELINUX ====================
+include device/qcom/sepolicy/SEPolicy.mk
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
-# Treble
+# ==================== TREBLE ====================
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 PRODUCT_VENDOR_MOVE_ENABLED := true
 
-# Vndk
+# ==================== VNDK ====================
 BOARD_VNDK_VERSION := current
 
-# Security patch level
-VENDOR_SECURITY_PATCH := 2022-03-01
+# ==================== SECURITY PATCH LEVEL ====================
+VENDOR_SECURITY_PATCH := 2024-01-01
 
-# Verified Boot
+# ==================== VERIFIED BOOT ====================
 BOARD_AVB_ENABLE := true
 BOARD_AVB_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --set_hashtree_disabled_flag
@@ -241,7 +245,7 @@ BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
 
-# Wi-Fi
+# ==================== WI-FI ====================
 BOARD_HAS_QCOM_WLAN := true
 BOARD_WLAN_DEVICE := qcwcn
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
@@ -254,5 +258,5 @@ WIFI_AVOID_IFACE_RESET_MAC_CHANGE := true
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
-# Inherit the proprietary files
+# ==================== VENDOR CONFIGURATION ====================
 -include vendor/samsung/m11q/BoardConfigVendor.mk
