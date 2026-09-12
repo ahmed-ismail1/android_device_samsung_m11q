@@ -1,37 +1,69 @@
-# Symlinks
-/bt_firmware(/.*)?											u:object_r:bt_firmware_file:s0
-/firmware(/.*)?												u:object_r:firmware_file:s0
-/persist(/.*)?												u:object_r:mnt_vendor_file:s0
+# Copyright (C) 2025 The LineageOS Project
 
-# Block Devices
-/dev/block/platform/soc/7824900\.sdhci/by-name/config		u:object_r:frp_block_device:s0
-/dev/block/platform/soc/7824900\.sdhci/by-name/debug		u:object_r:debug_block_device:s0
-/dev/block/platform/soc/7824900\.sdhci/by-name/dsp			u:object_r:dsp_block_device:s0
-/dev/block/platform/soc/7824900\.sdhci/by-name/dtbo			u:object_r:boot_block_device:s0
-/dev/block/platform/soc/7824900\.sdhci/by-name/efs			u:object_r:efs_block_device:s0
-/dev/block/platform/soc/7824900\.sdhci/by-name/hideen		u:object_r:hidden_block_device:s0
-/dev/block/platform/soc/7824900\.sdhci/by-name/param		u:object_r:param_block_device:s0
-/dev/block/platform/soc/7824900\.sdhci/by-name/persistent	u:object_r:frp_block_device:s0
-/dev/block/platform/soc/7824900\.sdhci/by-name/sec_efs		u:object_r:sec_efs_block_device:s0
-/dev/block/platform/soc/7824900\.sdhci/by-name/steady		u:object_r:steady_block_device:s0
-/dev/block/platform/soc/7824900\.sdhci/by-name/system		u:object_r:system_block_device:s0
-/dev/block/platform/soc/7824900\.sdhci/by-name/vbmeta		u:object_r:boot_block_device:s0
-/dev/block/platform/soc/7824900\.sdhci/by-name/vendor		u:object_r:system_block_device:s0
+# Fingerprint
+/data/vendor/biometric(/.*)?                                    u:object_r:fingerprint_data_file:s0
+/data/vendor/fingerprint(/.*)?                                  u:object_r:fingerprint_data_file:s0
+/sys/devices/virtual/fingerprint(/.*)?                          u:object_r:sysfs_fingerprint:s0
+/sys/class/fingerprint(/.*)?                                    u:object_r:sysfs_fingerprint:s0
 
-# Binaries
-/(vendor|system/vendor)/bin/hw/macloader					u:object_r:macloader_exec:s0
-/(vendor|system/vendor)/bin/init\.qti\.can\.sh				u:object_r:qti_init_shell_exec:s0
+# Qualcomm platform
+/dev/qseecom                                                    u:object_r:tee_device:s0
+/dev/ion                                                        u:object_r:ion_device:s0
 
-# Data
-/data/vendor/conn(/.*)?										u:object_r:vendor_convergence_data_file:s0
+# NFC
+/dev/nfc                                                        u:object_r:nfc_device:s0
 
-# EFS
-/mnt/vendor/efs(/.*)?										u:object_r:efs_file:s0
-/mnt/vendor/efs/wifi(/.*)?									u:object_r:wifi_efs_file:s0
+# Watchdog
+/dev/watchdog                                                   u:object_r:watchdog_device:s0
+/sys/class/watchdog(/.*)?                                       u:object_r:sysfs_watchdog:s0
 
-# HALs
-/(vendor|system/vendor)/bin/hw/android\.hardware\.health@2\.1-service-samsung		u:object_r:hal_health_default_exec:s0
-/(vendor|system/vendor)/bin/hw/android\.hardware\.light-service\.samsung			u:object_r:hal_light_default_exec:s0
-/(vendor|system/vendor)/bin/hw/vendor\.samsung\.hardware\.miscpower@2\.0-service	u:object_r:hal_power_default_exec:s0
-/(vendor|system/vendor)/bin/hw/vendor\.samsung\.hardware\.vibrator@2\.2-service		u:object_r:hal_vibrator_default_exec:s0
-/(vendor|system/vendor)/bin/hw/android\.hardware\.power-service-qti-m11q            u:object_r:hal_power_default_exec:s0
+# Misc devices
+/dev/block/bootdevice(/.*)?                                     u:object_r:sysfs_mmc:s0
+/dev/block/mmcblk0(/.*)?                                        u:object_r:block_device:s0
+
+# FRP
+/dev/block/persistent                                           u:object_r:frp_block_device:s0
+
+# Modem
+/dev/mdm                                                        u:object_r:mdm_device:s0
+
+# Thermal
+/sys/class/thermal(/.*)?                                        u:object_r:sysfs_thermal:s0
+
+# Input devices
+/dev/input/event[0-9]*                                          u:object_r:input_device:s0
+
+# Camera
+/dev/video[0-9]*                                                u:object_r:camera_device:s0
+/sys/class/video4linux(/.*)?                                    u:object_r:sysfs_video:s0
+
+# Flashlight
+/sys/class/flashlight(/.*)?                                     u:object_r:sysfs_flashlight:s0
+
+# KGSL (GPU)
+/dev/kgsl-3d0                                                   u:object_r:graphics_device:s0
+/dev/kgsl_events_device                                         u:object_r:graphics_device:s0
+/sys/class/kgsl(/.*)?                                           u:object_r:sysfs_gpu:s0
+
+# Audio
+/dev/msm_rtac                                                   u:object_r:audio_device:s0
+
+# DEBUG
+/proc/reset_reason                                              u:object_r:proc_reset:s0
+/proc/reset_reason_extra_info                                   u:object_r:proc_reset:s0
+/proc/reset_summary                                             u:object_r:proc_reset:s0
+/proc/reset_klog                                                u:object_r:proc_reset:s0
+/proc/reset_tzlog                                               u:object_r:proc_reset:s0
+/proc/store_lastkmsg                                            u:object_r:proc_reset:s0
+/proc/auto_comment                                              u:object_r:proc_reset:s0
+/proc/reset_rwc                                                 u:object_r:proc_reset:s0
+/proc/reset_history                                             u:object_r:proc_reset:s0
+/proc/extra                                                     u:object_r:proc_reset:s0
+/proc/rdx_bootdev                                               u:object_r:proc_reset:s0
+
+# Hardware Parameters
+/sys/class/sec/sec_hw_param(/.*)?                              u:object_r:sysfs_hwparam:s0
+/sys/class/sec/sec_debug(/.*)?                                 u:object_r:sysfs_debug:s0
+
+# Network
+/sys/class/net(/.*)?                                            u:object_r:sysfs_net:s0

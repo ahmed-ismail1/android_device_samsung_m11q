@@ -1,0 +1,40 @@
+# Fingerprint HAL SELinux Policy
+# Copyright (C) 2025 The LineageOS Project
+
+# Allow fingerprint HAL to access TEE (FolderTech Sealed, etc.)
+allow hal_fingerprint_default tee_device:chr_file { open read write ioctl };
+allow hal_fingerprint_default tee_device:file { open read write ioctl };
+
+# Allow fingerprint HAL to access NFC device for secured zones
+allow hal_fingerprint_default nfc_device:chr_file { open read write ioctl };
+
+# Allow fingerprint HAL to read properties
+get_prop(hal_fingerprint_default, vendor_fingerprint_prop)
+
+# Allow fingerprint HAL to access input devices
+allow hal_fingerprint_default input_device:chr_file { open read write ioctl };
+allow hal_fingerprint_default input_device:dir search;
+
+# Allow fingerprint HAL to access vendor_fingerprint files
+allow hal_fingerprint_default fingerprint_data_file:dir { search read write add_name remove_name };
+allow hal_fingerprint_default fingerprint_data_file:file { create read write open append getattr setattr unlink };
+
+# Allow fingerprint HAL to access hwbinder
+hwbinder_use(hal_fingerprint_default)
+
+# Allow fingerprint HAL to access /sys/devices/virtual/fingerprint
+allow hal_fingerprint_default sysfs_fingerprint:dir search;
+allow hal_fingerprint_default sysfs_fingerprint:file { open read write getattr setattr };
+
+# Allow fingerprint HAL to use ion for secure buffers (needed for FolderTech)
+allow hal_fingerprint_default ion_device:chr_file { open read write ioctl };
+allow hal_fingerprint_default ion_device:dir search;
+
+# Allows fingerprint HAL to use timerfd (for timing operations)
+allow hal_fingerprint_default self:capability { dac_override dac_read_search setuid setgid sys_nice };
+
+# Allow fingerprint HAL to set timer
+allow hal_fingerprint_default self:timerfd_device { open create read write };
+
+# Allow access to /proc/cmdline for boot parameters
+allow hal_fingerprint_default proc_cmdline:file { open read };
