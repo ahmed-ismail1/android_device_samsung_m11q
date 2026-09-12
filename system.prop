@@ -1,11 +1,14 @@
-# Dex2oat
+# Dalvik Runtime
 dalvik.vm.dex2oat64.enabled=true
 
-# Fastbootd
+# Fastbootd - Enable fastboot daemon
 ro.fastbootd.available=true
 
-# GPS
+# GPS Configuration
 persist.backup.ntpServer=0.pool.ntp.org
 
-# Fwk detect
+# Framework Detection
 ro.vendor.qti.va_aosp.support=1
+
+# Performance Optimizations
+ro.vendor.perf_boost=1
